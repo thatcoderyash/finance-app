@@ -3,6 +3,7 @@ package com.zorvyn.finance.mapper;
 import com.zorvyn.finance.DTO.FinancialRecordRequest;
 import com.zorvyn.finance.DTO.FinancialRecordResponse;
 import com.zorvyn.finance.models.FinancialRecord;
+import com.zorvyn.finance.models.Type;
 import com.zorvyn.finance.models.User;
 
 public class FinancialRecordMapper {
@@ -11,7 +12,7 @@ public class FinancialRecordMapper {
         FinancialRecord record = new FinancialRecord();
 
         record.setAmount(dto.getAmount());
-        record.setType(FinancialRecord.Type.valueOf(dto.getType()));
+        record.setType(Type.valueOf(dto.getType()));
         record.setCategory(dto.getCategory());
         record.setDate(dto.getDate());
         record.setDescription(dto.getDescription());
