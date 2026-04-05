@@ -3,10 +3,8 @@ package com.zorvyn.finance.DTO;
 import lombok.Data;
 
 @Data
-public class UserResponse {
-    private Long id;
+public class SignUpRequest {
     private String name;
     private String email;
-    private String role;
-    private String status;
+    private String password;
 }

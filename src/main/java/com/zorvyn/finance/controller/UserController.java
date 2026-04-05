@@ -1,21 +1,32 @@
 package com.zorvyn.finance.controller;
 
-import com.zorvyn.finance.DTO.RegisterRequest;
+import com.zorvyn.finance.DTO.UpdateRoleRequest;
+import com.zorvyn.finance.DTO.UpdateStatusRequest;
 import com.zorvyn.finance.DTO.UserResponse;
-import com.zorvyn.finance.service.UserService;
+import com.zorvyn.finance.security.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/admin")
 public class UserController {
-    private UserService userService;
+        private final AuthService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@RequestBody RegisterRequest request){
-        UserResponse response = userService.register(request);
-        return ResponseEntity.ok(response);
-    }
+        @PutMapping("/{id}/role")
+        public ResponseEntity<UserResponse> assignRole(
+                @PathVariable Long id,
+                @RequestBody UpdateRoleRequest request) {
+
+            return ResponseEntity.ok(authService.assignRole(id, request.getRole()));
+        }
+
+        @PutMapping("/{id}/status")
+        public ResponseEntity<UserResponse> updateStatus(
+                @PathVariable Long id,
+                @RequestBody UpdateStatusRequest request) {
+
+            return ResponseEntity.ok(authService.updateStatus(id, request.getStatus()));
+        }
 }
