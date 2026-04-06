@@ -1,10 +1,7 @@
 package com.zorvyn.finance.service;
 
-import com.zorvyn.finance.DTO.FinancialRecordRequest;
-import com.zorvyn.finance.DTO.FinancialRecordResponse;
-import com.zorvyn.finance.models.FinancialRecord;
-import com.zorvyn.finance.models.Type;
-import com.zorvyn.finance.models.User;
+import com.zorvyn.finance.DTO.request.FinancialRecordRequest;
+import com.zorvyn.finance.DTO.response.FinancialRecordResponse;
 
 import java.time.LocalDate;
 import java.util.List;

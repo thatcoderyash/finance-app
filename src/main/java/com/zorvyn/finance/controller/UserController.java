@@ -1,9 +1,9 @@
 package com.zorvyn.finance.controller;
 
-import com.zorvyn.finance.DTO.UpdateRoleRequest;
-import com.zorvyn.finance.DTO.UpdateStatusRequest;
-import com.zorvyn.finance.DTO.UserResponse;
-import com.zorvyn.finance.security.AuthService;
+import com.zorvyn.finance.DTO.request.UpdateRoleRequest;
+import com.zorvyn.finance.DTO.request.UpdateStatusRequest;
+import com.zorvyn.finance.DTO.response.UserResponse;
+import com.zorvyn.finance.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

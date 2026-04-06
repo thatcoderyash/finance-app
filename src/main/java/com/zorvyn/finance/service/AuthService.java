@@ -1,14 +1,17 @@
-package com.zorvyn.finance.security;
+package com.zorvyn.finance.service;
 
-import com.zorvyn.finance.DTO.LoginRequest;
-import com.zorvyn.finance.DTO.LoginResponse;
-import com.zorvyn.finance.DTO.SignUpRequest;
-import com.zorvyn.finance.DTO.UserResponse;
+import com.zorvyn.finance.DTO.request.LoginRequest;
+import com.zorvyn.finance.DTO.response.LoginResponse;
+import com.zorvyn.finance.DTO.request.SignUpRequest;
+import com.zorvyn.finance.DTO.response.UserResponse;
+import com.zorvyn.finance.exceptions.EmailAlreadyExistsException;
+import com.zorvyn.finance.exceptions.UserNotFoundException;
 import com.zorvyn.finance.mapper.UserMapper;
 import com.zorvyn.finance.models.Role;
 import com.zorvyn.finance.models.Status;
 import com.zorvyn.finance.models.User;
 import com.zorvyn.finance.repository.UserRepository;
+import com.zorvyn.finance.utils.AuthUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +19,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 
 @Service
@@ -28,31 +33,29 @@ public class AuthService {
 
     public UserResponse signUp(SignUpRequest request){
 
-        // check if email exists
-        if (userRepository.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Email already exists");
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailAlreadyExistsException(request.getEmail());
         }
 
-        // DTO -> Entity
         User user = UserMapper.toEntity(request, passwordEncoder);
-
-        // save
         User savedUser = userRepository.save(user);
 
-        // Entity -> DTO
         return UserMapper.toDTO(savedUser);
     }
 
     public LoginResponse login(LoginRequest loginRequest) {
+
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()
+                )
         );
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        assert userDetails != null;
-        User user = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByEmail(Objects.requireNonNull(userDetails).getUsername())
+                .orElseThrow(() -> new UserNotFoundException(userDetails.getUsername()));
 
         String token = authUtil.generateAccessToken(user);
 
@@ -62,7 +65,7 @@ public class AuthService {
     public UserResponse assignRole(Long userId, Role role) {
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         user.setRole(role);
 
@@ -72,7 +75,7 @@ public class AuthService {
     public UserResponse updateStatus(Long userId, Status status) {
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         user.setStatus(status);
 

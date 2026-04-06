@@ -1,4 +1,4 @@
-package com.zorvyn.finance.DTO;
+package com.zorvyn.finance.DTO.request;
 
 import com.zorvyn.finance.models.Role;
 import lombok.Data;

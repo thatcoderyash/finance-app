@@ -1,4 +1,4 @@
-package com.zorvyn.finance.security;
+package com.zorvyn.finance.security.service;
 
 import com.zorvyn.finance.models.User;
 import com.zorvyn.finance.repository.UserRepository;

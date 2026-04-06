@@ -1,7 +1,7 @@
 package com.zorvyn.finance.mapper;
 
-import com.zorvyn.finance.DTO.SignUpRequest;
-import com.zorvyn.finance.DTO.UserResponse;
+import com.zorvyn.finance.DTO.request.SignUpRequest;
+import com.zorvyn.finance.DTO.response.UserResponse;
 import com.zorvyn.finance.models.Role;
 import com.zorvyn.finance.models.Status;
 import com.zorvyn.finance.models.User;

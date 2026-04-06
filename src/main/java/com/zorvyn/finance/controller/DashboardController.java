@@ -1,6 +1,6 @@
 package com.zorvyn.finance.controller;
 
-import com.zorvyn.finance.DTO.DashboardResponse;
+import com.zorvyn.finance.DTO.response.DashboardResponse;
 import com.zorvyn.finance.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

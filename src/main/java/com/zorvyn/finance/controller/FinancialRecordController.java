@@ -1,7 +1,7 @@
 package com.zorvyn.finance.controller;
 
-import com.zorvyn.finance.DTO.FinancialRecordRequest;
-import com.zorvyn.finance.DTO.FinancialRecordResponse;
+import com.zorvyn.finance.DTO.request.FinancialRecordRequest;
+import com.zorvyn.finance.DTO.response.FinancialRecordResponse;
 import com.zorvyn.finance.service.FinancialRecordService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

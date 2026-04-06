@@ -1,6 +1,6 @@
 package com.zorvyn.finance.service;
 
-import com.zorvyn.finance.DTO.DashboardResponse;
+import com.zorvyn.finance.DTO.response.DashboardResponse;
 import com.zorvyn.finance.models.FinancialRecord;
 import com.zorvyn.finance.models.Type;
 import com.zorvyn.finance.models.User;

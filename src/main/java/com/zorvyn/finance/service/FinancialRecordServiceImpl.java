@@ -1,7 +1,7 @@
 package com.zorvyn.finance.service;
 
-import com.zorvyn.finance.DTO.FinancialRecordRequest;
-import com.zorvyn.finance.DTO.FinancialRecordResponse;
+import com.zorvyn.finance.DTO.request.FinancialRecordRequest;
+import com.zorvyn.finance.DTO.response.FinancialRecordResponse;
 import com.zorvyn.finance.mapper.FinancialRecordMapper;
 import com.zorvyn.finance.models.FinancialRecord;
 import com.zorvyn.finance.models.Type;

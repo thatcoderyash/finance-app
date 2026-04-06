@@ -1,4 +1,4 @@
-package com.zorvyn.finance.DTO;
+package com.zorvyn.finance.DTO.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

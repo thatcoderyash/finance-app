@@ -1,7 +1,10 @@
 package com.zorvyn.finance.controller;
 
-import com.zorvyn.finance.DTO.*;
-import com.zorvyn.finance.security.AuthService;
+import com.zorvyn.finance.DTO.request.LoginRequest;
+import com.zorvyn.finance.DTO.request.SignUpRequest;
+import com.zorvyn.finance.DTO.response.LoginResponse;
+import com.zorvyn.finance.DTO.response.UserResponse;
+import com.zorvyn.finance.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

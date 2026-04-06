@@ -1,10 +1,11 @@
-package com.zorvyn.finance.security;
+package com.zorvyn.finance.utils;
 
 import com.zorvyn.finance.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -39,5 +40,29 @@ public class AuthUtil {
                 .parseSignedClaims(token)
                 .getPayload();
         return claims.getSubject();
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+
+        final String email = getEmailFromToken(token);
+
+        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public Date getExpirationDateFromToken(String token) {
+        return getClaimsFromToken(token).getExpiration();
+    }
+
+    public boolean isTokenExpired(String token) {
+        return getExpirationDateFromToken(token).before(new Date());
+    }
+
+    private Claims getClaimsFromToken(String token) {
+         return  Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
     }
 }
